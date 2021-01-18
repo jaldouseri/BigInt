@@ -497,6 +497,91 @@ BigInt BigInt::operator++(int dummy) {
 	return returned;
 }
 
+BigInt BigInt::operator<<(const int shift) {
+
+	BigInt result, Two, DigitValue;
+	Two = "2";
+	DigitValue = "1";
+
+	for (int i = 0; i < shift; i++) {
+		DigitValue = Two * DigitValue;
+	}
+	result = *this * DigitValue;
+
+	result.ResetLength();
+	return result;
+}
+
+BigInt BigInt::operator<<(const BigInt bi) {
+
+	BigInt result, Two, DigitValue, i;
+	Two = "2";
+	DigitValue = "1";
+
+	for (i = "0"; i < bi; i++) {
+		DigitValue = Two * DigitValue;
+	}
+	result = *this * DigitValue;
+
+	result.ResetLength();
+	return result;
+}
+
+BigInt BigInt::operator>>(const int shift) {
+
+	BigInt result, Two, DigitValue;
+	Two = "2";
+	DigitValue = "1";
+
+	for (int i = 0; i < shift; i++) {
+		DigitValue = Two * DigitValue;
+	}
+	result = *this / DigitValue;
+
+	result.ResetLength();
+	return result;
+}
+
+BigInt BigInt::operator>>(const BigInt bi) {
+
+	BigInt result, Two, DigitValue, i;
+	Two = "2";
+	DigitValue = "1";
+
+	for (i = "0"; i < bi; i++) {
+		DigitValue = Two * DigitValue;
+	}
+	result = *this / DigitValue;
+	result.sign = sign;
+
+	result.ResetLength();
+	return result;
+}
+
+BigInt BigInt::pow(const BigInt& bi) {
+
+	BigInt result, i;
+
+	if ((bi.LEN == 1 && bi.digits[0] == 0))
+	{
+		result = "0";
+	}
+	else
+	{
+		result = "1";
+		for (i = "1"; i <= bi; i++) {
+			result = result * *this;
+											// Protect from reaching MAX
+			if (result.LEN >= MAX)
+			{
+				break;
+			}
+			result.ResetLength();
+		}
+	}
+	return result;
+}
+
 BigInt BigInt::add(const BigInt& bi) {
 	// Simple add without sign .
 	BigInt result;
@@ -593,63 +678,3 @@ BigInt BigInt::BinaryToBigInt(const string binary) {
 	return result;
 }
 
-BigInt BigInt::operator<<(const int shift) {
-
-	BigInt result, Two, DigitValue;
-	Two = "2";
-	DigitValue = "1";
-
-	for (int i = 0; i < shift; i++) {
-		DigitValue = Two * DigitValue;
-	}
-	result = *this * DigitValue;
-
-	result.ResetLength();
-	return result;
-}
-
-BigInt BigInt::operator<<(const BigInt bi) {
-
-	BigInt result, Two, DigitValue,i;
-	Two = "2";
-	DigitValue = "1";
-
-	for (i = "0"; i < bi; i++) {
-		DigitValue = Two * DigitValue;
-	}
-	result = *this * DigitValue;
-
-	result.ResetLength();
-	return result;
-}
-
-BigInt BigInt::operator>>(const int shift) {
-
-	BigInt result, Two, DigitValue;
-	Two = "2";
-	DigitValue = "1";
-
-	for (int i = 0; i < shift; i++) {
-		DigitValue = Two * DigitValue;
-	}
-	result = *this / DigitValue;
-
-	result.ResetLength();
-	return result;
-}
-
-BigInt BigInt::operator>>(const BigInt bi) {
-
-	BigInt result, Two, DigitValue, i;
-	Two = "2";
-	DigitValue = "1";
-
-	for (i = "0"; i < bi; i++) {
-		DigitValue = Two * DigitValue;
-	}
-	result = *this / DigitValue;
-	result.sign = sign;
-
-	result.ResetLength();
-	return result;
-}

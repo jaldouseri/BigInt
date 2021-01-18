@@ -55,6 +55,7 @@ public:
     BigInt operator<<(const BigInt bi);             // shift left input BigInt
     BigInt operator>>(const int bi);                // shift right input integer
     BigInt operator>>(const BigInt bi);             // shift right input BigInt
+    BigInt pow(const BigInt& bi);                   // exponent number repeat bi times 
     BigInt add(const BigInt& bi);                   // add without sign
     BigInt subtract(const BigInt& bi);              // subtract without sign
     BigInt absolute();                              // absolute value
@@ -63,7 +64,7 @@ public:
 
 private:
                             
-    const static int MAX = 100;                     // MAX NUMBER
+    const static int MAX = 200;                     // MAX NUMBER
     int LEN = 1;                                    // length of number
     int sign = 1;                                   // 1 for + positive -1 for negative
     int digits[MAX];                                // max digits is 80

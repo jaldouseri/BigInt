@@ -90,6 +90,11 @@ int main() {
     f = e >> 4;
     cout << " e >> 4 : " << f << endl;
 
+    cout << endl;
+
+    cout << " a.pow(g) : " << a.pow(g) << endl;
+    cout << " a.pow(b) : " << a.pow(b) << endl;
+
 
     return 0;
 }
